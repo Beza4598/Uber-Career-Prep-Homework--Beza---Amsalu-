@@ -1,0 +1,30 @@
+//Ex5
+
+public class BinarySearchTreePhoneBook implements PhoneBook{
+
+    private BST<Entry> phoneBook;
+
+    public BinarySearchTreePhoneBook(){
+        phoneBook = new BST<>();
+    }
+
+    public void insert(String name, long phoneNumber){
+        phoneBook.insert(new Entry(name, phoneNumber));
+    }
+
+    public long find(String name){
+        Entry value = phoneBook.getNode(new Entry(name, 000));
+
+        if(value != null)
+            return value.getNumber();
+
+
+        return -1;
+    }
+
+    public int size(){
+        return phoneBook.getSize();
+    }
+
+
+}
