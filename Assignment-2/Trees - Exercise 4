@@ -1,0 +1,92 @@
+
+// Ex 4
+public class BST <T extends Comparable<T>> {
+    public static class Node<T extends Comparable<T>> {
+        public T key;
+        public Node left;
+        public Node right;
+
+        public Node(T key) {
+            this.key = key;
+            left = null;
+            right = null;
+        }
+    }
+
+    private Node root;
+    private int size = 0;
+
+    public BST(){
+
+    }
+
+
+    public void insert(T key){
+        size++;
+        root = insert(root, key);
+    }
+
+    private Node insert(Node root, T key) {
+
+        if (root == null) {
+            root = new Node(key);
+            return root;
+        }
+
+
+        if (root.key.compareTo(key) > 0)
+            root.left = insert(root.left, key);
+        else if (root.key.compareTo(key) < 0)
+            root.right = insert(root.right, key);
+
+
+        return root;
+
+    }
+
+    public boolean find(T key){
+        return find(root, key);
+    }
+    public T getNode(T key){
+        return getNode(root, key);
+    }
+
+    private boolean find(Node root,T key) {
+        if(root == null)
+            return false;
+
+        int compareVal = root.key.compareTo(key);
+
+        if(compareVal == 0)
+            return true;
+
+        if(compareVal > 0)
+            return find(root.left, key);
+         else
+            return find(root.right, key);
+
+    }
+
+    private T getNode(Node root, T key) {
+        if(root == null)
+            return null;
+
+        int compareVal = root.key.compareTo(key);
+
+        if(compareVal == 0)
+            return (T) root.key;
+
+
+        if(compareVal > 0)
+            return getNode(root.left, key);
+        else
+            return getNode(root.right, key);
+
+    }
+
+    public int getSize(){
+        return size;
+    }
+
+
+}
