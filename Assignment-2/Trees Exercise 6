@@ -1,0 +1,51 @@
+import java.io.File;
+import java.util.Scanner;
+
+
+//Ex 6
+public class Main {
+
+    public static void main(String[] args) {
+        ListPhoneBook pBList = new ListPhoneBook();
+        BinarySearchTreePhoneBook pBTree = new BinarySearchTreePhoneBook();
+
+        reader(pBList);
+        reader(pBTree);
+
+    }
+
+    public static void reader(PhoneBook phoneBook){
+        final long startTime = System.currentTimeMillis();
+
+        try  {
+            File myObj = new File("/Users/bemigbaramsalu/IdeaProjects/TMCProjects/mooc-java-programming-ii/Assignment1/out/production/Assignment1/data.csv");
+            Scanner scanner = new Scanner(myObj);
+
+            while (scanner.hasNextLine()) {
+                String[] parts = scanner.next().split(",");
+                phoneBook.insert(parts[0], Long.parseLong(parts[1]));
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+
+        final long endTime = System.currentTimeMillis();
+
+        try {
+            File myObj = new File("/Users/bemigbaramsalu/IdeaProjects/TMCProjects/mooc-java-programming-ii/Assignment1/out/production/Assignment1/search.txt");
+            Scanner scanner = new Scanner(myObj);
+
+            while (scanner.hasNextLine()) {
+                long result = phoneBook.find(scanner.next());
+                if(result == -1){
+                    System.out.println("problem");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+
+        System.out.println("execution time:" + (endTime - startTime));
+        System.out.println("size: " + phoneBook.size());
+    }
+}
