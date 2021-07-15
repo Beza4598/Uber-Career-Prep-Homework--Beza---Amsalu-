@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class GraphWithAdjacencyList {
+
+    private Map<GraphNode, List<GraphNode>> adjNodes;
+
+    public GraphWithAdjacencyList(){
+        adjNodes = new HashMap<>();
+    }
+
+    public static class GraphNode {
+        public int data;
+        GraphNode(int data) {
+            this.data = data;
+        }
+        public boolean equals (Object object){
+
+            if(object == this){
+                return true;
+            }
+
+            if (!(object instanceof GraphNode)){
+                return false;
+            }
+
+            GraphNode node = (GraphNode) object;
+
+            if(node.data == node.data){
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    public void addNode(int key){
+        ArrayList<GraphNode> list = new ArrayList<>();
+        adjNodes.putIfAbsent( new GraphNode(key), list);
+    }
+
+    public void removeNode(int key){
+        adjNodes.remove(new GraphNode(key));
+    }
+
+    public void addEdge(int node1, int node2){
+        if(adjNodes.containsKey(node1)){
+            adjNodes.get(new GraphNode(node1)).add(new GraphNode(node2));
+        }
+
+        if(adjNodes.containsKey(node2)){
+            adjNodes.get(new GraphNode(node2)).add(new GraphNode(node1));
+        }
+    }
+
+    public void removeEdge(int node1, int node2){
+        if(adjNodes.containsKey(node1)){
+            adjNodes.get(new GraphNode(node1)).remove(new GraphNode(node2));
+        }
+
+        if(adjNodes.containsKey(node2)){
+            adjNodes.get(new GraphNode(node2)).remove(new GraphNode(node1));
+        }
+
+    }
+
+    public List<GraphNode> getAdjNodes(int key){
+        return adjNodes.get(new GraphNode(key));
+    }
+
+
+}
