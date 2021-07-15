@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+
+//Ex5
+public class ListPhoneBook implements PhoneBook {
+
+    private ArrayList<Entry> phoneBook;
+
+    public ListPhoneBook(){
+        phoneBook = new ArrayList<>();
+    }
+
+    public void insert(String name, long phoneNumber){
+        phoneBook.add(new Entry(name, phoneNumber));
+    }
+
+    public long find(String name){
+        for(Entry x : phoneBook){
+            if(x.getName().equals(name)){
+                return x.getNumber();
+            }
+        }
+
+        return -1;
+    }
+
+    public int size(){
+        return phoneBook.size();
+    }
+}
